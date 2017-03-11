@@ -6,16 +6,25 @@ const PORT = 3000;
 
 app.use(morgan('combined'));
 
-app.get('/', (req, res) => {
-    fs.createReadStream('today.html').pipe(res);
+//const FIRST = 'today.html';
+//const SECOND = 'yesterday.html';
+
+const FIRST = 'yesterday.html';
+const SECOND = 'today.html';
+
+app.get('/og/', (req, res) => {
+    res.set('Content-Type', 'text/html');
+    fs.createReadStream(FIRST).pipe(res);
 });
 
-app.get('/today/', (req, res) => {
-    fs.createReadStream('today.html').pipe(res);
+app.get('/og/today/', (req, res) => {
+    res.set('Content-Type', 'text/html');
+    fs.createReadStream(FIRST).pipe(res);
 });
 
-app.get('/yesterday/', (req, res) => {
-    fs.createReadStream('yesterday.html').pipe(res);
+app.get('/og/yesterday/', (req, res) => {
+    res.set('Content-Type', 'text/html');
+    fs.createReadStream(SECOND).pipe(res);
 });
 
 try {
